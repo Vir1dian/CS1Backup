@@ -33,7 +33,7 @@ void partB() {
 // *******************************************************************************
 // Assignment 1C: Cyborg Data Type Sizes
 // Author: Gavin Torrecampo
-// Description: This program determines the amound of memory used by 4 data types
+// Description: This program determines the amount of memory used by 4 data types
 // Status: Complete
 // Date: January 22, 2024
 // ********************************************************************************
@@ -43,7 +43,6 @@ void partC() {
 	cout << "The size of 'float' in bytes: " << sizeof(float) << endl;
 	cout << "The size of 'double' in bytes: " << sizeof(double) << endl;
 }
-
 // Runs all parts of the homework in a sequence starting from part A
 int main() {
 	partA();
