@@ -7,7 +7,7 @@ int multiply(int, int);
 void display(int);
 void displayfriend(string name = "Tyler");
 
-int main() {
+int mainc() {
 	// display(add(3, 2));
 	// display(subtract(3, 2));
 	// display(multiply(3, 2));
