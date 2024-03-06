@@ -1,16 +1,17 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <math.h>
 using namespace std;
 
 void format_term(string&);
 float calculate_term(string term = "-12(x+15)^11", float x = 1);
 
 int main() {
-	string term1 = "-(X +75.40)^67";
+	string term1 = "(x+3)^0.5";
 	format_term(term1);
 	cout << term1 << endl;
-	// cout << calculate_term(term);
+	cout << calculate_term(term1);
 	return 0;
 }
 
@@ -41,7 +42,7 @@ void format_term(string& term) {
 		end_of_coefficient = term.length();
 
 	if (term.length() == 0) {
-		coefficient = "+1";
+		coefficient = "+0";
 		constant = "+0";
 		exponent = "^0";
 	}
@@ -82,6 +83,8 @@ void format_term(string& term) {
 }
 
 float calculate_term(string term, float x) {
-
-	return 0;
+	float coefficient = stof(term.substr(0, term.find('(')));
+	float constant = stof(term.substr(term.find('x') + 1, term.find(')') - (term.find('x') + 1)));
+	float exponent = stof(term.substr(term.find('^') + 1));
+	return coefficient * pow(x + constant, exponent);
 }
