@@ -2,18 +2,8 @@
 #include <string>
 #include <cctype>
 #include <math.h>
+#include "Functions.hpp"
 using namespace std;
-
-void format_term(string&);
-float calculate_term(string term = "-12(x+15)^11", float x = 1);
-
-int main() {
-	string term1 = "(x+3)^0.5";
-	format_term(term1);
-	cout << term1 << endl;
-	cout << calculate_term(term1);
-	return 0;
-}
 
 void format_term(string& term) {
 	// Removes f(x)=, whitespace, and capitalized variables
@@ -87,4 +77,60 @@ float calculate_term(string term, float x) {
 	float constant = stof(term.substr(term.find('x') + 1, term.find(')') - (term.find('x') + 1)));
 	float exponent = stof(term.substr(term.find('^') + 1));
 	return coefficient * pow(x + constant, exponent);
+}
+
+void format_polynomial(string& poly) {
+	poly += ' '; // band aid fix for parsing issue at end of string
+	string new_poly;
+	string term;
+	bool is_in_parenthesis = false;
+
+	// Splitting up all terms and formatting them with format_term()
+	for (int i = 5; i < poly.length(); i++) {
+		if (poly[i] == '(')
+			is_in_parenthesis = true;
+		if (poly[i] == ')')
+			is_in_parenthesis = false;
+		if ((poly[i] == '+' || poly[i] == '-' || i == poly.length() - 1) && !is_in_parenthesis) {
+			format_term(term);
+			new_poly += term;
+			term.clear();
+		}
+		term += poly[i];
+	}
+	poly = new_poly;
+}
+
+
+float calculate_polynomial(string poly, float x) {
+	float f_of_x = 0;
+	poly += ' '; // band aid fix for parsing issue at end of string
+	string term;
+	bool is_in_parenthesis = false;
+
+	// Splitting up all terms and solving with calculate_term() individually
+	for (int i = 0; i < poly.length(); i++) {
+		if (poly[i] == '(')
+			is_in_parenthesis = true;
+		if (poly[i] == ')')
+			is_in_parenthesis = false;
+		if ((poly[i] == '+' || poly[i] == '-' || i == poly.length() - 1) && !is_in_parenthesis && i != 0) {
+			f_of_x += calculate_term(term, x);
+			cout << term << endl << calculate_term(term, x) << endl;
+			term.clear();
+		}
+		term += poly[i];
+	}
+	return f_of_x;
+}
+
+string derivative(string poly) {
+	for (int i = 0; i < poly.length(); i++) {
+		break;
+	}
+	return poly;
+}
+
+float newtons_method(string poly, float x0, int reps) {
+	return 0;
 }
