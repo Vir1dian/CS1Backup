@@ -7,16 +7,16 @@
 using namespace std;
 
 int main() {
-	string poly_a = "-(x-2)^5 + 1"; // Placeholder equation
-	float x = 3.75;
-	// cout << "Enter a function in terms of x:\n";
-	// getline(cin, poly);
-	// cout << "f(x) = " << poly_a << endl;
-	// cout << "f(" << x << ") = " << calculate_polynomial(poly_a, x) << endl;
-	// cout << "f'(x) = " << derivative(poly_a) << endl;
-	// cout << "f'(" << x << ") = " << calculate_polynomial(derivative(poly_a), x) << endl;
-	// cout << x - (calculate_polynomial(poly_a, x) / calculate_polynomial(derivative(poly_a), x));
-	cout << newtons_method(poly_a, x, 2);
+	string poly_a = "x^-4 - 3x^-2 + 2x^-3 - 5x^0 + 4x^1"; // Placeholders
+	float x = 1.15;
+	int reps = 5;
+	cout << "Enter a function in terms of x (omit f(x)=, y=, etc)\nExample is x^-4 - 3x^-2 + 2x^-3 - 5x^0 + 4x^1\n. . .";
+	getline(cin, poly_a);
+	cout << "Enter a starting value for function x:\n";
+	cin >> x;
+	cout << "Enter number of iterations for x:\n";
+	cin >> reps;
+	cout << newtons_method(poly_a, x, reps);
 	return 0;
 }
 
