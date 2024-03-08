@@ -8,14 +8,15 @@ using namespace std;
 
 int main() {
 	string poly_a = "-(x-2)^5 + 1"; // Placeholder equation
-	float x = 3.44;
+	float x = 3.75;
 	// cout << "Enter a function in terms of x:\n";
 	// getline(cin, poly);
-	cout << "f(x) = " << poly_a << endl;
-	cout << "f(" << x << ") = " << calculate_polynomial(poly_a, x) << endl;
-	cout << "f'(x) = " << derivative(poly_a) << endl;
-	cout << "f'(" << x << ") = " << calculate_polynomial(derivative(poly_a), x) << endl;
-	cout << x - (calculate_polynomial(poly_a, x) / calculate_polynomial(derivative(poly_a), x));
+	// cout << "f(x) = " << poly_a << endl;
+	// cout << "f(" << x << ") = " << calculate_polynomial(poly_a, x) << endl;
+	// cout << "f'(x) = " << derivative(poly_a) << endl;
+	// cout << "f'(" << x << ") = " << calculate_polynomial(derivative(poly_a), x) << endl;
+	// cout << x - (calculate_polynomial(poly_a, x) / calculate_polynomial(derivative(poly_a), x));
+	cout << newtons_method(poly_a, x, 2);
 	return 0;
 }
 
