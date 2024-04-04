@@ -1,0 +1,32 @@
+Legend: 
+# Number 
+& Type -> 1-Conceptual 2-Debugging 3-Comparison 4-FIB 5-TOF
+> Difficulty 
+* Category
+@ Answer
+-----------------
+#(1) &(1) >(1) *(2) 
+When is the following Boolean expression true (a and b are integers)?
+(a < b) && !(b > a)
+A. Never true
+B. a = b
+C. a < b
+D. a > b
+
+#(2) >(3) *(1,3)
+Consider the following code segment:
+int p = 5;
+int q = 2;
+int sum = 0;
+while (p <= 8) {
+  sum += p % q;
+  p++;
+  q++;
+}
+What is the value of sum after the code is executed?
+A. 1
+B. 0
+C. 13
+D. 7
+
+
