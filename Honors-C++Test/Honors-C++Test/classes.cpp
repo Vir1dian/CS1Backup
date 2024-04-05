@@ -136,6 +136,9 @@ string Test_Item::get_difficulty_name() {
 }
 
 string Test_Item::get_category_name(int index) {
+	if (m_categories[index] == 0) {
+		return "";
+	}
 	for (int i = 0; i < NUM_CATEGORY; i++) {
 		if (m_categories[index] - 1 == i) {
 			return all_categories[i];

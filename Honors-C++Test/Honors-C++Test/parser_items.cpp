@@ -14,31 +14,31 @@ using namespace std;
  * @param string: field of data the line is associated with in 
  * the file ("Attributes","Question","Answers", or "Solution")
  */
-void extract_line_parser(string line, Test_Item item, string field) {
+void extract_line_parser(string line, Test_Item& item, string field) {
 
 	if (field == "Attributes") {
 		if (line[0] == '*') {  // Categories Involved
 			// Handles differently from other attributes because it can have 
 			// multiple numbers.
-			if (line.find(",") == string::npos)
-				item.m_categories[0] = stoi(line.substr(1, line.find(".")));
+			if (line.find(',') == string::npos)
+				item.m_categories[0] = stoi(line.substr(1, line.find('.')));
 			else {
 				// Explodes the string into individual numbers betweem each comma until the period
 				// Then, numbers are processed into name equivalents according to all_categories from classes.h
-				int temp_attr, start = 1, end = line.find(","), categories_length = 0;
+				int temp_attr, start = 1, end = line.find(','), categories_length = 0;
 				temp_attr = stoi(line.substr(start, end));
 				item.m_categories[categories_length++] = temp_attr;
-				while (end != line.find(".")) {
-					start = line.find(",") + 1;
-					end = line.find(",", line.find(",")) != string::npos ? line.find(",", line.find(",")) : line.find(".");
+				while (end != line.find('.')) {
+					start = line.find(',') + 1;
+					end = line.find(',', line.find(',') + 1) != string::npos ? line.find(',', line.find(',') + 1) : line.find('.');
 					temp_attr = stoi(line.substr(start, end));
-					item.m_categories[categories_length++] = temp_attr;
+					item.m_categories[categories_length++] = temp_attr; //!!!
 				}
 			}
 		}
 		else {
 			// Number after the attribute symbol # & or >
-			int attr = stoi(line.substr(1, line.find(".")));
+			int attr = stoi(line.substr(1, line.find('.')));
 			if (line[0] == '#')  // Question Number
 				item.m_number = attr;
 			else if (line[0] == '&') // Question type
@@ -48,11 +48,11 @@ void extract_line_parser(string line, Test_Item item, string field) {
 		}
 	}
 	else if (field == "Question")
-		item.m_question += line;
+		item.m_question += line + "\n";
 	else if (field == "Answers")
-		item.m_answers += line;
+		item.m_answers += line + "\n";
 	else if (field == "Solution")
-		item.m_solution += line;
+		item.m_solution += line + "\n";
 }
 
 int extract_test_items(Test_Item all_items[NUM_TEST_ITEMS]) {
@@ -62,14 +62,13 @@ int extract_test_items(Test_Item all_items[NUM_TEST_ITEMS]) {
 		cout << "\n(!) File not found (!)\n";
 		return 1;
 	}
-
 	string line, item_field;
 	int line_number = 0, item_index = -1;
 	while (!fin.eof()) {
 		// Parsing component
 		line_number++;
 		getline(fin, line);
-		if (line_number <= 10)
+		if (line_number <= 10 || line.length() == 0)
 			continue;
 		if (line.find("Attributes:") != string::npos) {
 			item_index++;
@@ -88,15 +87,33 @@ int extract_test_items(Test_Item all_items[NUM_TEST_ITEMS]) {
 			item_field = "Solution";
 			continue;
 		}
-		/*
 		else
-			extract_line_parser(line, all_items[item_index], item_field); */
-
-		cout << line_number << " " << item_index << " " << item_field << " " << line << endl;
+			extract_line_parser(line, all_items[item_index], item_field); 
+		// cout << line_number << " " << item_index << " " << item_field << " " << line << endl;
 	}
-
 	fin.close();
 	return 0;
+}
+
+void display_test_items(Test_Item items[NUM_TEST_ITEMS]) {
+	cout << "\nNumber of test items: " << NUM_TEST_ITEMS << endl;
+	for (int i = 0; i < NUM_TEST_ITEMS; i++) {
+		cout << "\n{\nItem Number: " << items[i].m_number << ",";
+		cout << "\nQuestion Type: " << items[i].get_type_name() << ",";
+		cout << "\nQuestion Difficulty: " << items[i].get_difficulty_name() << ",";
+		cout << "\nConcepts Involved: \n{";
+		for (int j = 0; j < NUM_CATEGORY; j++) {
+			cout << items[i].get_category_name(j);
+			if (j < NUM_CATEGORY - 1)
+				cout << ", ";
+		}
+		cout << "},\nQuestion: \n" << items[i].m_question << ",";
+		cout << "\nAnswers: \n" << items[i].m_answers << ",";
+		cout << "\nSolution: " << items[i].m_solution << "\n}";
+		if (i < NUM_TEST_ITEMS - 1) {
+			cout << ",";
+		}
+	}
 }
 
 int add_test_items() {

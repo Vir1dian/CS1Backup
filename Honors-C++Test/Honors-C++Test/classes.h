@@ -24,10 +24,10 @@ public:
 };
 
 struct Test_Item {
-	int m_number;
-	int m_type;
-	int m_difficulty;
-	int m_categories[NUM_CATEGORY];
+	int m_number = 1;
+	int m_type = 1;
+	int m_difficulty = 1;
+	int m_categories[NUM_CATEGORY] = {0};
 	string m_question = "";
 	string m_answers = "";
 	string m_solution = "";
