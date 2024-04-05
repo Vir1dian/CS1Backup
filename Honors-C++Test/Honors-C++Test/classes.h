@@ -24,13 +24,17 @@ public:
 };
 
 struct Test_Item {
-	int number;
-	string type;
-	string difficulty;
-	string categories[NUM_CATEGORY];
-	string question;
-	string answers;
-	string solution;
+	int m_number;
+	int m_type;
+	int m_difficulty;
+	int m_categories[NUM_CATEGORY];
+	string m_question = "";
+	string m_answers = "";
+	string m_solution = "";
+
+	string get_type_name();
+	string get_difficulty_name();
+	string get_category_name(int index);
 };
 
 // If the questions in the filtered pool is less than the size of the test, then other random questions are used to fill the empty space.

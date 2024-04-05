@@ -115,3 +115,30 @@ void Settings::reset_settings() {
 	for (int i = 0; i < NUM_TYPE; i++)
 		m_types[i] = "0";
 }
+
+string Test_Item::get_type_name() {
+	for (int i = 0; i < NUM_TYPE; i++) {
+		if (m_type - 1 == i) {
+			return all_types[i];
+		}
+	}
+}
+
+string Test_Item::get_difficulty_name() {
+	switch (m_difficulty) {
+	case 1:
+		return "Easy";
+	case 2:
+		return "Moderate";
+	default:
+		return "Challenging";
+	}
+}
+
+string Test_Item::get_category_name(int index) {
+	for (int i = 0; i < NUM_CATEGORY; i++) {
+		if (m_categories[index] - 1 == i) {
+			return all_categories[i];
+		}
+	}
+}
