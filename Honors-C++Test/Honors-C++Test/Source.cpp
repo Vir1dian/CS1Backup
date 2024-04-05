@@ -1,10 +1,17 @@
 #include <iostream>
-#include <iomanip>
 #include <fstream>
-#include "TestSettings.h"
+#include <string>
+#include "parser_items.h"
+#include "classes.h"
 using namespace std;
 
 int main() {
+	// File parsing
+	Test_Item set1[NUM_TEST_ITEMS];
+	// cout << extract_test_items(set1);
+
+	
+	// Settings
 	Settings my_settings;
 	int confirm;
 
@@ -15,6 +22,7 @@ int main() {
 		cout << "\n* Confirm settings? (0 no, 1 yes) *\n";
 		cin >> confirm;
 	} while (confirm != 1);
+	
 
 
 
