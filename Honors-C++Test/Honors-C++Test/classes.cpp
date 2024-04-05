@@ -1,13 +1,6 @@
 #include <iostream>
-#include <iomanip>
-#include "TestSettings.h"
+#include "classes.h"
 using namespace std;
-
-const string all_categories[NUM_CATEGORY] =
-{ "Introduction/Other", "Making Decisions", "Loops", "Files",
-	"Binary/Hexadecimal", "Functions", "Arrays", "Text Files",
-	"C Strings/String", "Structures", "Binary Files" };
-const string all_types[NUM_TYPE] = { "Conceptual", "Debugging", "Comparison", "FIB", "TOF" };
 
 void Settings::select_settings() {
 	int select_cat, select_type; // Temp values used to add selected items to arrays
