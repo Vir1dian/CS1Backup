@@ -2,26 +2,21 @@
 #include <iomanip>
 using namespace std;
 
-/**
- * This function displays a menu which allows the user to set the size of the test, 
- * difficulty of questions, and categories involved. 
- * @param int: Size of test (1-40)
- * @param int: Difficulty of test (1-3)
- * @param string[]: Categories of test questions
- * @param string[]: Types of test questions
- * @return: none
- */
-void set_settings(int&, int&, string[], string[]);
+const int NUM_CATEGORY = 11, NUM_TYPE = 5;
 
-/**
- * This function displays the test settings selected by the user
- * in a formatted manner.
- * @param int: Size of test (1-40)
- * @param int: Difficulty of test (1-3)
- * @param string[]: Categories of test questions
- * @param string[]: Types of test questions
- * @return: none
- */
-void show_settings(int&, int&, string[], string[]);
+class Settings {
+
+private:
+	int m_test_size;
+	int m_difficulty;
+	string m_categories[NUM_CATEGORY];
+	string m_types[NUM_TYPE];
+
+public:
+	void select_settings();
+	void show_settings();
+	void reset_settings();
+
+};
 
 // If the questions in the filtered pool is less than the size of the test, then other random questions are used to fill the empty space.

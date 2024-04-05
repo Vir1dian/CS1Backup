@@ -1,19 +1,28 @@
 Legend: 
 # Number 
-& Type -> 1-Conceptual 2-Debugging 3-Comparison 4-FIB 5-TOF
-> Difficulty 
-* Category
-@ Answer
+& Type : 1-Conceptual 2-Debugging 3-Comparison 4-FIB 5-TOF
+> Difficulty : 1-Easy 2-Moderate 3-Challenging
+* Category : 
+  1-Introduction/Other 2-Making Decisions 3-Loops 4-Files 
+  5-Binary/Hexadecimal 6-Functions 7-Arrays 8-Text Files
+  9-C Strings/String 10-Structures 11-Binary Files
 -----------------
-#(1) &(1) >(1) *(2) 
+Attributes: 
+#1 &1 >1 *2 
+Question: 
 When is the following Boolean expression true (a and b are integers)?
 (a < b) && !(b > a)
-A. Never true
-B. a = b
-C. a < b
-D. a > b
+Answers:
+A| Never true
+B| a = b
+C| a < b
+D| a > b
+Solution:
+C
 
-#(2) >(3) *(1,3)
+Attributes:
+#2 &1 >3 *1,3
+Question:
 Consider the following code segment:
 int p = 5;
 int q = 2;
@@ -24,9 +33,25 @@ while (p <= 8) {
   q++;
 }
 What is the value of sum after the code is executed?
-A. 1
-B. 0
-C. 13
-D. 7
+Answers:
+A| 1
+B| 0
+C| 13
+D| 7
+Solution:
+D
 
+Attributes:
+#3 &1 >1 *1,2
+Question:
+What is assigned to the variable x?
+int x, y = 2, z = 4;
+x = y++ == --z;
+Answers:
+A| 1
+B| 0
+C| 3
+D| 4
+Solution:
+B
 
