@@ -25,14 +25,14 @@ void extract_line_parser(string line, Test_Item& item, string field) {
 			else {
 				// Explodes the string into individual numbers betweem each comma until the period
 				// Then, numbers are processed into name equivalents according to all_categories from classes.h
-				int temp_attr, start = 1, end = line.find(','), categories_length = 0;
+				int temp_attr, start = 1, end = line.find(',') != string::npos ? line.find(',') : line.find('.'), categories_length = 0;
 				temp_attr = stoi(line.substr(start, end));
 				item.m_categories[categories_length++] = temp_attr;
 				while (end != line.find('.')) {
-					start = line.find(',') + 1;
-					end = line.find(',', line.find(',') + 1) != string::npos ? line.find(',', line.find(',') + 1) : line.find('.');
+					start = end + 1;
+					end = line.find(',', start + 1) != string::npos ? line.find(',', start + 1) : line.find('.');
 					temp_attr = stoi(line.substr(start, end));
-					item.m_categories[categories_length++] = temp_attr; //!!!
+					item.m_categories[categories_length++] = temp_attr; 
 				}
 			}
 		}
@@ -64,7 +64,7 @@ int extract_test_items(Test_Item all_items[NUM_TEST_ITEMS]) {
 	}
 	string line, item_field;
 	int line_number = 0, item_index = -1;
-	while (!fin.eof()) {
+	while (!fin.eof() && item_index < NUM_TEST_ITEMS) {
 		// Parsing component
 		line_number++;
 		getline(fin, line);
@@ -123,6 +123,7 @@ int add_test_items() {
 		cout << "\n(!) File not found (!)\n";
 		return 1;
 	}
+	// Code here
 	fout.close();
 	return 0;
 }
