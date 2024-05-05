@@ -9,9 +9,9 @@ using namespace std;
  * This function is solely used for the extract_test_items() function. 
  * It is used to parse a line to determine what to add to a Test_Item
  * object.
- * @param string: line to be parsed 
- * @param Test_Item: Object to be updated by line data
- * @param string: field of data the line is associated with in 
+ * @param string line: line to be parsed 
+ * @param Test_Item item: Object to be updated by line data
+ * @param string field: field of data the line is associated with in
  * the file ("Attributes","Question","Answers", or "Solution")
  */
 void extract_line_parser(string line, Test_Item& item, string field) {
@@ -24,7 +24,7 @@ void extract_line_parser(string line, Test_Item& item, string field) {
 				item.m_categories[0] = stoi(line.substr(1, line.find('.')));
 			else {
 				// Explodes the string into individual numbers betweem each comma until the period
-				// Then, numbers are processed into name equivalents according to all_categories from classes.h
+				// Then, numbers are converted into name equivalents according to all_categories from classes.h
 				int temp_attr, start = 1, end = line.find(',') != string::npos ? line.find(',') : line.find('.'), categories_length = 0;
 				temp_attr = stoi(line.substr(start, end));
 				item.m_categories[categories_length++] = temp_attr;
@@ -96,23 +96,20 @@ int extract_test_items(Test_Item all_items[NUM_TEST_ITEMS]) {
 }
 
 void display_test_items(Test_Item items[NUM_TEST_ITEMS]) {
-	cout << "\nNumber of test items: " << NUM_TEST_ITEMS << endl;
-	for (int i = 0; i < NUM_TEST_ITEMS; i++) {
-		cout << "\n{\nItem Number: " << items[i].m_number << ",";
-		cout << "\nQuestion Type: " << items[i].get_type_name() << ",";
-		cout << "\nQuestion Difficulty: " << items[i].get_difficulty_name() << ",";
+	cout << "\nNumber of test items: " << NUM_TEST_ITEMS << endl << endl;
+	for (int i = 0; items[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
+		cout << "\n\n************\nItem Number: " << items[i].m_number;
+		cout << "\nQuestion Type: " << items[i].get_type_name();
+		cout << "\nQuestion Difficulty: " << items[i].get_difficulty_name();
 		cout << "\nConcepts Involved: \n{";
 		for (int j = 0; j < NUM_CATEGORY; j++) {
 			cout << items[i].get_category_name(j);
 			if (j < NUM_CATEGORY - 1)
 				cout << ", ";
 		}
-		cout << "},\nQuestion: \n" << items[i].m_question << ",";
-		cout << "\nAnswers: \n" << items[i].m_answers << ",";
-		cout << "\nSolution: " << items[i].m_solution << "\n}";
-		if (i < NUM_TEST_ITEMS - 1) {
-			cout << ",";
-		}
+		cout << "}\nQuestion: \n" << items[i].m_question;
+		cout << "\nAnswers: \n" << items[i].m_answers;
+		cout << "\nSolution: " << items[i].m_solution << "\n\n************\n";
 	}
 }
 

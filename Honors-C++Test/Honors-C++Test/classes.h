@@ -10,13 +10,13 @@ const string all_types[NUM_TYPE] = { "Conceptual", "Debugging", "Comparison", "F
 
 class Settings {
 
-private:
-	int m_test_size;
-	int m_difficulty;
-	string m_categories[NUM_CATEGORY];
-	string m_types[NUM_TYPE];
-
 public:
+	int m_test_size = 20;
+	int m_difficulty = 1;
+	int m_categories[NUM_CATEGORY] = { 0 };
+	int m_types[NUM_TYPE] = { 0 };
+
+
 	/* // Still learning how constructors work
 	Settings(int test_size, int difficulty, string categories[NUM_CATEGORY], string types[NUM_TYPE]) {
 		m_test_size = test_size;
@@ -35,7 +35,7 @@ public:
 
 class Test_Item {
 public:
-	int m_number = 1;
+	int m_number = 0;
 	int m_type = 1;
 	int m_difficulty = 1;
 	int m_categories[NUM_CATEGORY] = {0};
@@ -56,9 +56,9 @@ public:
 	}
 	*/
 
-	string get_type_name();
-	string get_difficulty_name();
-	string get_category_name(int index);
+	string get_type_name() const;
+	string get_difficulty_name() const;
+	string get_category_name(int index) const;
 
 	// Function shuffle() creates a Test_Item_Shuffled object from this object if type is not "FIB" or "TOF"
 	// Test_Item_Shuffled shuffle(); 
@@ -73,5 +73,6 @@ public:
 	// Function shuffle() reshuffles the m_answers_shuffled array and reassigns m_solution_shuffled;
 	// void shuffle(); 
 };
-
 // If the questions in the filtered pool is less than the size of the test, then other random questions are used to fill the empty space.
+
+void create_test(Test_Item test[NUM_TEST_ITEMS], Settings settings, const Test_Item set[NUM_TEST_ITEMS]);
