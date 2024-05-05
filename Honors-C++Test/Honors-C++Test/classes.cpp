@@ -173,6 +173,7 @@ void create_test(Test_Item test[NUM_TEST_ITEMS], Settings setting, const Test_It
 				included[j] = included[j + 1];
 				included[NUM_TEST_ITEMS - 1] = {};
 			}
+			in_index--;
 			i--;
 		}
 	}
@@ -193,11 +194,26 @@ void create_test(Test_Item test[NUM_TEST_ITEMS], Settings setting, const Test_It
 				included[j] = included[j + 1];
 				included[NUM_TEST_ITEMS - 1] = {};
 			}
+			in_index--;
 			i--;
 		}
 	}
-	// Shuffle included & excluded
 
+	// Shuffle included & excluded
+	for (int i = 0; included[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
+		int j = rand() % (in_index);
+		Test_Item temp;
+		temp = included[i];
+		included[i] = included[j];
+		included[j] = temp;
+	}
+	for (int i = 0; excluded[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
+		int j = rand() % (ex_index);
+		Test_Item temp;
+		temp = excluded[i];
+		excluded[i] = excluded[j];
+		excluded[j] = temp;
+	}
 
 	// Add items from included, fill in remaining with excluded if possible
 	int test_index = 0;

@@ -31,7 +31,7 @@ int main() {
 	} while (confirm != 1);
 
 	// Test Creation
-
+	srand(time(0)); 
 	Test_Item my_test[NUM_TEST_ITEMS]; 
 	create_test(my_test, my_settings, set1);  // populate my_test based on my_settings
 	display_test_items(my_test);  

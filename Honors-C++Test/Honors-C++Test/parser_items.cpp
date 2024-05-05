@@ -98,7 +98,7 @@ int extract_test_items(Test_Item all_items[NUM_TEST_ITEMS]) {
 void display_test_items(Test_Item items[NUM_TEST_ITEMS]) {
 	cout << "\nNumber of test items: " << NUM_TEST_ITEMS << endl << endl;
 	for (int i = 0; items[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
-		cout << "\n\n************\nItem Number: " << items[i].m_number;
+		cout << "\n\n******(" << i + 1 << ")****** \nItem Number : " << items[i].m_number;
 		cout << "\nQuestion Type: " << items[i].get_type_name();
 		cout << "\nQuestion Difficulty: " << items[i].get_difficulty_name();
 		cout << "\nConcepts Involved: \n{";
