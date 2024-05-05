@@ -9,24 +9,11 @@ const string all_categories[NUM_CATEGORY] =
 const string all_types[NUM_TYPE] = { "Conceptual", "Debugging", "Comparison", "FIB", "TOF" };
 
 class Settings {
-
 public:
 	int m_test_size = 20;
 	int m_difficulty = 1;
 	int m_categories[NUM_CATEGORY] = { 0 };
 	int m_types[NUM_TYPE] = { 0 };
-
-
-	/* // Still learning how constructors work
-	Settings(int test_size, int difficulty, string categories[NUM_CATEGORY], string types[NUM_TYPE]) {
-		m_test_size = test_size;
-		m_difficulty = difficulty;
-		for (int i = 0; i < NUM_CATEGORY; i++)
-			m_categories[i] = categories[i];
-		for (int i = 0; i < NUM_TYPE; i++)
-			m_types[i] = types[i];
-	}
-	*/
 
 	void select_settings();
 	void show_settings();
@@ -43,25 +30,9 @@ public:
 	string m_answers = "";
 	string m_solution = "";
 
-	/*
-	Test_Item(int number, int type, int difficulty, int categories[NUM_CATEGORY], string question, string answers, string solution) {
-		m_number = number;
-		m_type = type;
-		m_difficulty = difficulty;
-		for (int i = 0; i < NUM_CATEGORY; i++)
-			m_categories[i] = categories[i];
-		m_question = question;
-		m_answers = answers;
-		m_solution = solution;
-	}
-	*/
-
 	string get_type_name() const;
 	string get_difficulty_name() const;
 	string get_category_name(int index) const;
-
-	// Function shuffle() creates a Test_Item_Shuffled object from this object if type is not "FIB" or "TOF"
-	// Test_Item_Shuffled shuffle(); 
 };
 
 // This class is used to enable multiple-choice answers to be shuffled when added to a test object
@@ -74,5 +45,3 @@ public:
 	// void shuffle(); 
 };
 // If the questions in the filtered pool is less than the size of the test, then other random questions are used to fill the empty space.
-
-void create_test(Test_Item test[NUM_TEST_ITEMS], Settings settings, const Test_Item set[NUM_TEST_ITEMS]);

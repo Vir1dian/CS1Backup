@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 #include "classes.h"
 #include "parser_items.h"
 using namespace std;

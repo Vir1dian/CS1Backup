@@ -1,7 +1,4 @@
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <algorithm>
 #include "classes.h"
 using namespace std;
 
@@ -139,88 +136,4 @@ string Test_Item::get_category_name(int index) const {
 			return all_categories[i];
 		}
 	}
-}
-
-// Helper for create_test, finds the common numbers between arrays setting_cats and items_cats
-bool has_common_categories(const int setting_cats[NUM_CATEGORY], const int items_cats[NUM_CATEGORY]) {
-	for (int i = 0; setting_cats[i] != 0 && i < NUM_CATEGORY; i++) {
-		for (int j = 0; items_cats[j] != 0 && j < NUM_CATEGORY; j++) {
-			if (setting_cats[i] == items_cats[j])
-				return true;
-		}
-	}
-	return false;
-}
-
-void create_test(Test_Item test[NUM_TEST_ITEMS], Settings setting, const Test_Item items[NUM_TEST_ITEMS]) {
-	Test_Item included[NUM_TEST_ITEMS], excluded[NUM_TEST_ITEMS];
-	int in_index = 0, ex_index = 0;
-
-	// Filter by category
-	for (int i = 0; i < NUM_TEST_ITEMS; i++) { 
-		if (has_common_categories(setting.m_categories, items[i].m_categories))
-			included[in_index++] = items[i];
-		else
-			excluded[ex_index++] = items[i];
-	}
-	
-	// Filter by difficulty 
-	for (int i = 0; included[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
-		if (included[i].m_difficulty != setting.m_difficulty) {
-			// Move to excluded and remove from included, shift subsequent elements back
-			excluded[ex_index++] = included[i];  
-			for (int j = i; j + 1 < NUM_TEST_ITEMS; j++) {
-				included[j] = included[j + 1];
-				included[NUM_TEST_ITEMS - 1] = {};
-			}
-			in_index--;
-			i--;
-		}
-	}
-
-	// Filter by type
-	for (int i = 0; included[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
-		bool has_type = false;
-		for (int j = 0; setting.m_types[j] != 0 && j < NUM_TYPE; j++) {
-			if (setting.m_types[j] == included[i].m_type) {
-				has_type = true;
-				break;
-			}
-		}
-		if (!has_type) {
-			// Move to excluded and remove from included, shift subsequent elements back
-			excluded[ex_index++] = included[i];
-			for (int j = i; j + 1 < NUM_TEST_ITEMS; j++) {
-				included[j] = included[j + 1];
-				included[NUM_TEST_ITEMS - 1] = {};
-			}
-			in_index--;
-			i--;
-		}
-	}
-
-	// Shuffle included & excluded
-	for (int i = 0; included[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
-		int j = rand() % (in_index);
-		Test_Item temp;
-		temp = included[i];
-		included[i] = included[j];
-		included[j] = temp;
-	}
-	for (int i = 0; excluded[i].m_number != 0 && i < NUM_TEST_ITEMS; i++) {
-		int j = rand() % (ex_index);
-		Test_Item temp;
-		temp = excluded[i];
-		excluded[i] = excluded[j];
-		excluded[j] = temp;
-	}
-
-	// Add items from included, fill in remaining with excluded if possible
-	int test_index = 0;
-	for (int i = 0; included[i].m_number != 0 && i < setting.m_test_size; i++)
-		test[test_index++] = included[i];
-	in_index = test_index;
-	for (int i = 0; i < setting.m_test_size - in_index; i++)
-		test[test_index++] = excluded[i]; 
-	
 }

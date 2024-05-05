@@ -3,9 +3,9 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
-#include <algorithm>
 #include "parser_items.h"
 #include "classes.h"
+#include "functions_for_test.h"
 using namespace std;
 
 int main() {
@@ -34,10 +34,7 @@ int main() {
 	srand(time(0)); 
 	Test_Item my_test[NUM_TEST_ITEMS]; 
 	create_test(my_test, my_settings, set1);  // populate my_test based on my_settings
-	display_test_items(my_test);  
-
-
-	// Grading
+	take_test(my_test, my_settings);  
 
 
 
